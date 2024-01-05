@@ -87,3 +87,39 @@ var finances = [
     ['Feb-2017', 671099],
   ];
   
+console.log("Financial Analysis");
+console.log("--------------------------------------");
+
+console.log("Total months: " + finances.length);
+
+// The net total amount of Profit/Losses over the entire period.
+var sum = 0;
+for (var i = 0; i < finances.length; i++) {
+  sum += finances[i][1];
+}
+console.log("Total: $" + sum);
+
+// The average of the changes in Profit/Losses over the entire period.
+
+var profitChange = 0; //track profit change month to month
+var min = 0; //check profit/loss against min amount
+var max = 0; //check profit/loss against max amount
+var minDate = ""; //return date as a string
+var maxDate = "";
+var length = finances.length - 1;
+
+for (var i = 1; i < finances.length; i++) {
+  let finance = finances[i][1] - finances[i - 1][1];
+  if (finance < min) {
+    min = finance;
+    minDate = finances[i][0];
+  }
+  if (finance > max) {
+    max = finance;
+    maxDate = finances[i][0];
+  }
+  profitChange += finance; //Calculate the change in profit/loss month to month
+}
+console.log("Average Change: $" + (profitChange / length).toFixed(2)); //find the average
+console.log("Greatest Increase in Profits: " + maxDate + " ($" + max + ")"); // The greatest increase in profits (date and amount) over the entire period.
+console.log("Greatest Decrease in Profits: " + minDate + " ($" + min + ")"); // The greatest decrease in profits (date and amount) over the entire period.
